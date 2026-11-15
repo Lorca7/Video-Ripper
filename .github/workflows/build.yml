@@ -9,6 +9,15 @@ permissions:
   contents: read
 
 jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: for f in src/*.js src/renderer/*.js scripts/*.js; do node --check "$f"; done
+
   mac:
     runs-on: macos-14
     steps:
