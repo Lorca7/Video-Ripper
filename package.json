@@ -1,0 +1,43 @@
+{
+  "name": "video-ripper",
+  "productName": "Video Ripper",
+  "version": "1.0.0",
+  "description": "Pull a video from YouTube, pick the part you want, and export it to your Desktop.",
+  "main": "src/main.js",
+  "license": "MIT",
+  "author": "Video Ripper",
+  "scripts": {
+    "fetch-binaries": "node scripts/fetch-binaries.js",
+    "start": "npm run fetch-binaries && electron .",
+    "dist": "node scripts/fetch-binaries.js --all-mac && electron-builder --mac --arm64 --x64 --publish never"
+  },
+  "devDependencies": {
+    "electron": "^45.3.2",
+    "electron-builder": "^26.18.0"
+  },
+  "build": {
+    "appId": "com.videoripper.app",
+    "productName": "Video Ripper",
+    "files": [
+      "src/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "bin/${os}-${arch}",
+        "to": "bin"
+      }
+    ],
+    "mac": {
+      "category": "public.app-category.video",
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "identity": "-",
+      "hardenedRuntime": false,
+      "minimumSystemVersion": "12.0",
+      "artifactName": "Video-Ripper-${version}-mac-${arch}.${ext}"
+    }
+  }
+}

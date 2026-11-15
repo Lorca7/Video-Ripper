@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; media-src file:; img-src 'self' data:">
+  <title>Video Ripper</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="bar">
+    <input id="url" type="text" spellcheck="false" placeholder="Paste a YouTube link…" aria-label="Video link">
+    <select id="quality" aria-label="Download quality">
+      <option value="1080">1080p</option>
+      <option value="720">720p</option>
+      <option value="best">Highest available</option>
+    </select>
+    <button id="load" class="primary">Load video</button>
+    <button id="open" title="Open a video file from this Mac">Open file…</button>
+    <button id="update" class="quiet" title="Fetch the newest downloader if YouTube links stop working">Update downloader</button>
+  </header>
+
+  <div id="status" class="status" hidden>
+    <span id="status-text"></span>
+    <div class="meter"><div id="status-fill"></div></div>
+    <button id="status-cancel" class="quiet">Cancel</button>
+  </div>
+
+  <main>
+    <section id="stage" class="stage">
+      <div id="empty" class="empty">
+        <h1>Video Ripper</h1>
+        <p>Paste a YouTube link above and press <b>Load video</b>.</p>
+        <p class="dim">Then drag the frame box and the timeline window to choose what to keep.</p>
+      </div>
+      <video id="video" preload="auto" hidden></video>
+      <div id="crop-layer" class="crop-layer" hidden>
+        <div class="crop-clip"><div id="crop-shade" class="crop-shade"></div></div>
+        <div id="crop-box" class="crop-box">
+          <span class="third v1"></span><span class="third v2"></span>
+          <span class="third h1"></span><span class="third h2"></span>
+          <span class="handle" data-h="nw"></span><span class="handle" data-h="n"></span>
+          <span class="handle" data-h="ne"></span><span class="handle" data-h="e"></span>
+          <span class="handle" data-h="se"></span><span class="handle" data-h="s"></span>
+          <span class="handle" data-h="sw"></span><span class="handle" data-h="w"></span>
+          <span id="crop-size" class="crop-size"></span>
+        </div>
+      </div>
+    </section>
+
+    <section id="editor" class="editor" inert>
+      <div class="row transport">
+        <button id="play" class="round" title="Play / pause (Space)">▶</button>
+        <span id="clock" class="clock">0:00.0 / 0:00.0</span>
+        <span class="spacer"></span>
+        <label>Frame
+          <select id="aspect">
+            <option value="full">Full frame</option>
+            <option value="free">Custom</option>
+            <option value="16:9">16:9</option>
+            <option value="9:16">9:16</option>
+            <option value="1:1">1:1</option>
+            <option value="4:5">4:5</option>
+            <option value="4:3">4:3</option>
+          </select>
+        </label>
+      </div>
+
+      <div id="timeline" class="timeline">
+        <div id="range" class="range">
+          <span class="grip" data-g="start"></span>
+          <span class="grip" data-g="end"></span>
+        </div>
+        <div id="playhead" class="playhead"></div>
+      </div>
+
+      <div class="row">
+        <label>Start <input id="in" class="time" type="text" value="0:00.0"></label>
+        <button id="set-in" title="Set start to the playhead (I)">Set start here</button>
+        <label>End <input id="out" class="time" type="text" value="0:00.0"></label>
+        <button id="set-out" title="Set end to the playhead (O)">Set end here</button>
+        <span id="length" class="dim"></span>
+        <span class="spacer"></span>
+        <select id="format" aria-label="Export format">
+          <option value="mp4">MP4 · H.264 + AAC (universal)</option>
+          <option value="prores">MOV · ProRes 422 (editing master)</option>
+        </select>
+        <button id="export" class="primary">Export to Desktop</button>
+      </div>
+      <div id="result" class="result" hidden></div>
+    </section>
+  </main>
+
+  <script src="renderer.js"></script>
+</body>
+</html>
