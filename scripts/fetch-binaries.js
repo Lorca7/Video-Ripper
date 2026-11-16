@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Downloads the yt-dlp and ffmpeg executables the app drives.
 //   node scripts/fetch-binaries.js            -> for this machine (dev)
-//   node scripts/fetch-binaries.js --all-mac  -> both macOS architectures (packaging)
+//   node scripts/fetch-binaries.js --mac      -> Apple silicon macOS (packaging)
 // Files land in bin/<os>-<arch>/ which electron-builder copies into the app.
 
 const fs = require('fs');
@@ -14,7 +14,6 @@ const YTDLP_BASE = 'https://github.com/yt-dlp/yt-dlp/releases/latest/download';
 
 const TARGETS = {
   'mac-arm64': { ffmpeg: 'ffmpeg-darwin-arm64', ytdlp: 'yt-dlp_macos' },
-  'mac-x64': { ffmpeg: 'ffmpeg-darwin-x64', ytdlp: 'yt-dlp_macos' },
   'linux-x64': { ffmpeg: 'ffmpeg-linux-x64', ytdlp: 'yt-dlp_linux' },
   'linux-arm64': { ffmpeg: 'ffmpeg-linux-arm64', ytdlp: 'yt-dlp_linux_aarch64' },
 };
@@ -45,5 +44,5 @@ function fetchTarget(key) {
 }
 
 const os = process.platform === 'darwin' ? 'mac' : process.platform;
-const keys = process.argv.includes('--all-mac') ? ['mac-arm64', 'mac-x64'] : [`${os}-${process.arch}`];
+const keys = process.argv.includes('--mac') ? ['mac-arm64'] : [`${os}-${process.arch}`];
 keys.forEach(fetchTarget);

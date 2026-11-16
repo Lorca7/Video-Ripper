@@ -12,15 +12,14 @@ the part you want, and exports that piece — with its audio — to your Desktop
     CapCut and everything else, or
   - **MOV (ProRes 422)** – a larger editing master with uncompressed audio.
 
-Runs on macOS 12 and later (including Sonoma 14.6), Apple silicon and Intel. Nothing else
+Runs on Apple silicon Macs with macOS 12 or later (including Sonoma 14.6). Nothing else
 needs to be installed: the downloader (yt-dlp) and encoder (ffmpeg) are inside the app.
 
 ## Install
 
 1. Open the repository's **Actions** tab, pick the latest *Build macOS app* run and download
    the **Video-Ripper-macOS** artifact.
-2. Open the `.dmg` for your Mac (`arm64` = Apple silicon, `x64` = Intel) and drag
-   **Video Ripper** into Applications.
+2. Open the `.dmg` and drag **Video Ripper** into Applications.
 3. The app is not signed with an Apple developer certificate, so the first launch needs one
    extra step. In Terminal:
 
@@ -34,7 +33,7 @@ Or build it yourself on a Mac with Node.js 20+:
 
 ```sh
 npm install
-npm run dist     # creates dist/Video-Ripper-<version>-mac-<arch>.dmg
+npm run dist     # creates dist/Video-Ripper-<version>-mac-arm64.dmg
 ```
 
 ## Use

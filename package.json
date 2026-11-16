@@ -9,7 +9,7 @@
   "scripts": {
     "fetch-binaries": "node scripts/fetch-binaries.js",
     "start": "npm run fetch-binaries && electron .",
-    "dist": "node scripts/fetch-binaries.js --all-mac && electron-builder --mac --arm64 --x64 --publish never"
+    "dist": "node scripts/fetch-binaries.js --mac && electron-builder --mac --arm64 --publish never"
   },
   "devDependencies": {
     "electron": "^45.3.2",
